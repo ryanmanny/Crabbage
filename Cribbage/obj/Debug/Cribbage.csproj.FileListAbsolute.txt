@@ -1,0 +1,9 @@
+C:\Users\Ryan Manny\Documents\Visual Studio 2015\Projects 321\Cribbage\Cribbage\bin\Debug\Cribbage.exe.config
+C:\Users\Ryan Manny\Documents\Visual Studio 2015\Projects 321\Cribbage\Cribbage\bin\Debug\Cribbage.exe
+C:\Users\Ryan Manny\Documents\Visual Studio 2015\Projects 321\Cribbage\Cribbage\bin\Debug\Cribbage.pdb
+C:\Users\Ryan Manny\Documents\Visual Studio 2015\Projects 321\Cribbage\Cribbage\obj\Debug\Cribbage.csprojResolveAssemblyReference.cache
+C:\Users\Ryan Manny\Documents\Visual Studio 2015\Projects 321\Cribbage\Cribbage\obj\Debug\Cribbage.Form1.resources
+C:\Users\Ryan Manny\Documents\Visual Studio 2015\Projects 321\Cribbage\Cribbage\obj\Debug\Cribbage.Properties.Resources.resources
+C:\Users\Ryan Manny\Documents\Visual Studio 2015\Projects 321\Cribbage\Cribbage\obj\Debug\Cribbage.csproj.GenerateResource.Cache
+C:\Users\Ryan Manny\Documents\Visual Studio 2015\Projects 321\Cribbage\Cribbage\obj\Debug\Cribbage.exe
+C:\Users\Ryan Manny\Documents\Visual Studio 2015\Projects 321\Cribbage\Cribbage\obj\Debug\Cribbage.pdb

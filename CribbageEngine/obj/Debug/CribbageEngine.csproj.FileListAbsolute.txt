@@ -1,0 +1,5 @@
+C:\Users\Ryan Manny\Documents\Visual Studio 2015\Projects 321\Cribbage\CribbageEngine\bin\Debug\CribbageEngine.dll
+C:\Users\Ryan Manny\Documents\Visual Studio 2015\Projects 321\Cribbage\CribbageEngine\bin\Debug\CribbageEngine.pdb
+C:\Users\Ryan Manny\Documents\Visual Studio 2015\Projects 321\Cribbage\CribbageEngine\obj\Debug\CribbageEngine.dll
+C:\Users\Ryan Manny\Documents\Visual Studio 2015\Projects 321\Cribbage\CribbageEngine\obj\Debug\CribbageEngine.pdb
+C:\Users\Ryan Manny\Documents\Visual Studio 2015\Projects 321\Cribbage\CribbageEngine\obj\Debug\CribbageEngine.csprojResolveAssemblyReference.cache

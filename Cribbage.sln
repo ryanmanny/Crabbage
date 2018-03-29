@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cribbage", "Cribbage\Cribbage.csproj", "{84AA761E-A509-4F01-8720-2FECE028A94E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CribbageEngine", "CribbageEngine\CribbageEngine.csproj", "{D64DE50F-925C-4503-B2AC-DE07DD3D45C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CribbageTest", "CribbageTest\CribbageTest.csproj", "{1EB42334-3FA0-49FD-8500-B941FAF65EEB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{84AA761E-A509-4F01-8720-2FECE028A94E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84AA761E-A509-4F01-8720-2FECE028A94E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84AA761E-A509-4F01-8720-2FECE028A94E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84AA761E-A509-4F01-8720-2FECE028A94E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D64DE50F-925C-4503-B2AC-DE07DD3D45C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D64DE50F-925C-4503-B2AC-DE07DD3D45C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D64DE50F-925C-4503-B2AC-DE07DD3D45C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D64DE50F-925C-4503-B2AC-DE07DD3D45C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EB42334-3FA0-49FD-8500-B941FAF65EEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EB42334-3FA0-49FD-8500-B941FAF65EEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EB42334-3FA0-49FD-8500-B941FAF65EEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EB42334-3FA0-49FD-8500-B941FAF65EEB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,8 @@
+C:\Users\Ryan Manny\Documents\Visual Studio 2015\Projects 321\Cribbage\CribbageTest\bin\Debug\CribbageTest.exe.config
+C:\Users\Ryan Manny\Documents\Visual Studio 2015\Projects 321\Cribbage\CribbageTest\bin\Debug\CribbageTest.exe
+C:\Users\Ryan Manny\Documents\Visual Studio 2015\Projects 321\Cribbage\CribbageTest\bin\Debug\CribbageTest.pdb
+C:\Users\Ryan Manny\Documents\Visual Studio 2015\Projects 321\Cribbage\CribbageTest\bin\Debug\CribbageEngine.dll
+C:\Users\Ryan Manny\Documents\Visual Studio 2015\Projects 321\Cribbage\CribbageTest\bin\Debug\CribbageEngine.pdb
+C:\Users\Ryan Manny\Documents\Visual Studio 2015\Projects 321\Cribbage\CribbageTest\obj\Debug\CribbageTest.csprojResolveAssemblyReference.cache
+C:\Users\Ryan Manny\Documents\Visual Studio 2015\Projects 321\Cribbage\CribbageTest\obj\Debug\CribbageTest.exe
+C:\Users\Ryan Manny\Documents\Visual Studio 2015\Projects 321\Cribbage\CribbageTest\obj\Debug\CribbageTest.pdb
