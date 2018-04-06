@@ -18,6 +18,13 @@ namespace CribbageEngine
 
         public static int EvaluateFullHand(Card[] cards, int cutIndex)
         {
+            //Evaluates the 5 cards according to the rules of Cribbage
+
+            //The cut card is treated differently than the rest for knobs and flush purposes
+            //Could assume that the last card is always the cut card but that isn't very cohesive
+
+            //return 29;
+
             if (cutIndex < cards.Count())
             {
                 var faces = new Card.FaceType[cards.Count()];
@@ -33,7 +40,6 @@ namespace CribbageEngine
                     values[i] = cards[i].Value;
                 }
 
-                //return 29;
                 int fifteens = FindFifteens(values);
                 int pairs = FindPairs(faces);
                 int runs = FindRuns(faceVals);
@@ -67,21 +73,27 @@ namespace CribbageEngine
 
         static int FindFifteens(int[] values)
         {
-            //Every possible
+            //HOYLE RULES:
+            //Every way to make 15 in your hand is worth 2 points each
+
+            //It might be worth changing this to support other values than 15
+            //It wouldn't be Cribbage anymore, but supporting more than 5 cards isn't Cribbage either
             int sum = 0;
             int total = 0;
 
+            //Looks at every possible combo you can make from cards in hand
             foreach (var combo in HelperFunctions.GetPowerSet(values.Count()))
             {
                 foreach(int i in combo)
                 {
+                    //Sums all values
                     sum += values[i];
                     //No point checking any more if we already went over
                     if (sum > 15) break;
                 }
-                //This combo gave a 15
                 if (sum == 15)
                 {
+                    //This combo was indeed a 15
                     total += FifteenValue;
                 }
                 sum = 0;
@@ -96,7 +108,7 @@ namespace CribbageEngine
             //Although that's just the rule of thumb. Technically all pairs are just worth 2 points, 3 of a kind is 3 pairs
             int total = 0;
 
-            //Handshake all of the cards together
+            //Handshake all of the cards together - pretty simple
             for (int i = 0; i < faces.Count(); i++)
             {
                 for (int j = i + 1; j < faces.Count(); j++)

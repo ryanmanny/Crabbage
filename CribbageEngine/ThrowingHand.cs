@@ -16,16 +16,10 @@ namespace CribbageEngine
 
     public class ThrowingHand
     {
-        ////DATA TYPES
-        //protected internal struct HandCard
-        //{
-        //    public Card card;
-        //    public bool thrown;
-        //}
-        
         //CONSTANTS
         protected const int DefaultStartingHandSize = 6;
         protected const int FinalHandSize = 4;
+        protected const int FullHandSize = FinalHandSize + 1; //Including the cut card
 
         //CONSTRUCTOR
         public ThrowingHand(Deck deck, int size = DefaultStartingHandSize)
@@ -67,6 +61,7 @@ namespace CribbageEngine
 
         public Card[] FinalHand
         {
+            //Represents the 4 cards that are chosen to keep
             get
             {
                 //Returns the array of 4 cards that will make up the final hand
@@ -133,7 +128,26 @@ namespace CribbageEngine
                 }
             }
         }
-
+        
+        protected Card[] HandComplement
+        {
+            //Returns an array of all cards not in hand
+            get
+            {
+                var cards = new Card[Deck.NumCards - _size];
+                int top = 0;
+                //Return all existing cards NOT in the _cards array
+                foreach (var card in Deck.All)
+                {
+                    if (!_cards.Contains(card))
+                    {
+                        cards[top++] = card;
+                    }
+                }
+                return cards;
+            }
+        }
+        
         public bool Valid
         {
             //When this is true, the two subHand properties will return valid input, we can finish
@@ -175,23 +189,9 @@ namespace CribbageEngine
         protected Card[] GetRest(int[] indices)
         {
             //Returns all cards not in the list of indices
-            return GetCards(GetIndexComplement(indices));
+            return GetCards(HelperFunctions.GetIndexComplement(_size, indices));
         }
 
-        public int[] GetIndexComplement(int[] indices)
-        {
-            var complement = new int[_size - indices.Count()];
-            int top = 0;
-            for (int i = 0; i < _size; i++)
-            {
-                if (!indices.Contains(i))
-                {
-                    complement[top++] = i;
-                }
-            }
-            return complement;
-        }
-        
         public void MarkThrown(int index)
         {
             if (!(index < _size))

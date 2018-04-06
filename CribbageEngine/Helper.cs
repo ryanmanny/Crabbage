@@ -142,6 +142,20 @@ namespace CribbageEngine
             }
         }
 
+        public static int[] GetIndexComplement(int n, int[] indices)
+        {
+            var complement = new int[n - indices.Count()];
+            int top = 0;
+            for (int i = 0; i < n; i++)
+            {
+                if (!indices.Contains(i))
+                {
+                    complement[top++] = i;
+                }
+            }
+            return complement;
+        }
+
         //Members
         private static Dictionary<Tuple<int, int>, int[][]> KCombinations = new Dictionary<Tuple<int, int>, int[][]>();
         private static Dictionary<int, int[][]> PowerSets = new Dictionary<int, int[][]>();

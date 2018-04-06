@@ -9,29 +9,42 @@ namespace CribbageEngine
     public class ThrowingHandAI : ThrowingHand
     {
         //TYPES
-        protected enum CribType
+        public enum ThrowingStrategy
         {
-            Optimize, Deoptimize, Ignore
+            //This ENUM field pattern should be replaced with Strategy Pattern (almost too obvious)
+
+            //Perfect play, BRUTEFORCE algorithms
+            OptimizeCrib,
+            DeoptimizeCrib,
+            //GREEDY algorithm, always takes best hand (much faster)
+            IgnoreCrib,
+            //STUPID algorith, always takes random hand
+            Random,
+            Invalid
         }
-
-        //CONSTANTS
-        readonly int Iterations;
-        const int FullHandSize = 5;
-
+        
         //CONSTRUCTOR
-        public ThrowingHandAI(Deck deck, int DefaultStartingHandSize = 6) : base(deck, DefaultStartingHandSize)
+        public ThrowingHandAI(Deck deck, ThrowingStrategy strategy, int DefaultStartingHandSize = 6) : base(deck, DefaultStartingHandSize)
         {
-            //COMBINATORICS
-            // ( n k ) combinations, where n is _size and k is FinalHandSize
-            // (n!/(k!*(n-k)!)
-            Iterations = HelperFunctions.Combinations(_size, FinalHandSize);
-            
-            //Automatically creates ideal hand
-            //ThrowAway(CribType.Ignore);
+            _strategy = strategy;
+            //Automatically creates (somewhat) ideal hand
+            //ThrowAway(_strategy);
         }
 
         //METHODS
-        protected int[] ThrowAway(CribType optimizeCrib)
+        protected void ThrowAway(ThrowingStrategy strategy)
+        {
+            //Figures out the best way to throw away
+            var best = GetOptimalThrow(strategy);
+
+            foreach (var throwIndex in HelperFunctions.GetIndexComplement(_size, best))
+            {
+                //Mark the indices from the optimal throw as thrown
+                MarkThrown(throwIndex);
+            }
+        }
+
+        protected int[] GetOptimalThrow(ThrowingStrategy strategy)
         {
             //This is the AI, automatically chooses which cards to throw away
             //DESCRIPTION:
@@ -39,17 +52,21 @@ namespace CribbageEngine
             //1) Having the statistically best hand possible (given random cut-up card)
             //2) Giving the opponent the statistically best/worst cards possible (given 3 random cards)
 
-            //Stores all possible combos
-            var combos = HelperFunctions.GetKCombination(_size, FinalHandSize);
+            //What Optimal means depends on your strategy
 
             //This array will hold the best 4 indices to keep
             var best = new int[4];
-            double score = 0, bestScore = 0;
 
-            foreach (var combo in combos)
+            //Stores the best score so far to find max with
+            double score = double.MinValue, bestScore = 0;
+
+            //Looks at every possible throwing possible (there should be 15, since 6C4 is 15)
+            foreach (var combo in HelperFunctions.GetKCombination(_size, FinalHandSize))
             {
-                score = AnalyzeThrow(combo, optimizeCrib);
+                //Finds hand that best satisfies chosen strategy
+                score = AnalyzeThrow(combo, strategy);
                 {
+                    //Better hand found, replace original
                     if (score > bestScore)
                     {
                         bestScore = score;
@@ -57,38 +74,50 @@ namespace CribbageEngine
                     }
                 }
             }
-            foreach (var throwIndex in GetIndexComplement(best))
-            {
-                MarkThrown(throwIndex);
-            }
             return best;
         }
 
-        protected double AnalyzeThrow(int[] keep, CribType optimize)
+        protected double AnalyzeThrow(int[] keep, ThrowingStrategy strategy)
         {
             //Get weighted average of both sides of this option
             double handScore = AnalyzeHand(keep);
             double cribScore;
             double score;
 
-            switch (optimize)
+            //STRATEGY PATTERN - CHANGE THIS LATER!
+            //score = strategy(keep)
+            //There is no point to have all these algorithms here
+
+            //Switch statement takes the AI's strategy
+            switch (strategy)
             {
-                case CribType.Optimize:
+                case ThrowingStrategy.OptimizeCrib:
                     cribScore = AnalyzeCrib(keep);
                     //Optimize hand AND crib at the same time
                     score = cribScore + handScore;
                     break;
-                case CribType.Deoptimize:
+
+                case ThrowingStrategy.DeoptimizeCrib:
                     cribScore = AnalyzeCrib(keep);
-                    //Otherwise, deoptimize crib
+                    //Otherwise, deoptimize crib. The better the crib, the worse this throw
                     score = handScore - cribScore;
                     break;
-                case CribType.Ignore:
+
+                case ThrowingStrategy.IgnoreCrib:
+                    //There are only 15 ways to throw away, ignoring will only give a bad throw every once in a while
+                    //It's MUCH MUCH faster than optimize and deoptimize
                     score = handScore;
                     break;
-                default:
-                    score = 0.0;
+
+                case ThrowingStrategy.Random:
+                    //Randomly assigns quality values to each throw
+                    var r = new Random();
+                    score = 29 * r.NextDouble();
                     break;
+
+                default:
+                    //This strategy doesn't exist
+                    throw new ArgumentException("No strategy provided!");
             }
             return score;
         }
@@ -158,23 +187,7 @@ namespace CribbageEngine
             return value;
         }
 
-        protected Card[] HandComplement
-        {
-            //Returns an array of all cards not in hand
-            get
-            {
-                var cards = new Card[Deck.NumCards - _size];
-                int top = 0;
-                //Return all existing cards NOT in the _cards array
-                foreach (var card in Deck.All)
-                {
-                    if (!_cards.Contains(card))
-                    {
-                        cards[top++] = card;
-                    }
-                }
-                return cards;
-            }
-        }
+        //PRIVATE FIELDS
+        private ThrowingStrategy _strategy;
     }
 }

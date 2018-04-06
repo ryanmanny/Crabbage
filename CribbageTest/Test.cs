@@ -12,28 +12,33 @@ namespace CribbageTest
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(TestCompareCribType(5));
+            Console.WriteLine(TestCribStrategies(5));
         }
 
-        public static double TestCompareCribType(int tests)
+        public static double TestCribStrategies(int n)
         {
-            var deck = new Deck();
-            var ai = new ThrowingHandAITest(deck);
+            //This function compares the GREEDY throwing strategy with the much slower PERFECT PLAY strategy
+            //The strategies are compared n times and the percentage of success is returned
 
+            var deck = new Deck();
+            ThrowingHandAITest ai;
+
+            //Tracks trial successes vs. failures
             int same = 0, different = 0;
 
-            for (int i = 0; i < tests; i++)
+            for (int i = 0; i < n; i++)
             {
-                bool success = ai.CompareCribType();
+                //Gives AI new input
+                deck.Shuffle();
+                ai = new ThrowingHandAITest(deck, ThrowingHandAI.ThrowingStrategy.Invalid);
+
+                bool success = ai.CompareCribStrategies();
 
                 if (success) same++;
                 else different++;
-
-                deck.Shuffle();
-                ai = new ThrowingHandAITest(deck);
             }
 
-            //Returns percentage that gave same result
+            //Returns percentage of trials that gave same result
             return 100 * ((double) same / (same + different));
         }
 
@@ -197,15 +202,16 @@ namespace CribbageTest
 
     class ThrowingHandAITest : ThrowingHandAI
     {
-        public ThrowingHandAITest(Deck deck) : base(deck)
+        public ThrowingHandAITest(Deck deck, ThrowingStrategy strategy) : base(deck, strategy)
         {
 
         }
 
-        public bool CompareCribType()
+        public bool CompareCribStrategies()
         {
-            var ignore = ThrowAway(CribType.Ignore);
-            var optimize = ThrowAway(CribType.Optimize);
+            //Overrides usual strategy with new one
+            var ignore = GetOptimalThrow(ThrowingStrategy.IgnoreCrib);
+            var optimize = GetOptimalThrow(ThrowingStrategy.DeoptimizeCrib);
 
             if (Enumerable.SequenceEqual(ignore, optimize))
             {
